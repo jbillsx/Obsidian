@@ -2,22 +2,20 @@ package obsidiangame;
 import java.awt.Image;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
-public class Block {
+public class Air extends Block{
 
-    private String block = "dirt.png";
+    private String block = "air.png";
     private static int width = 32;
     private static int height = 32;
     private int x;
     private int y;
     private Image image;
-    public boolean visible = true;
-    public boolean solid = true;
-    public Block(){}
-    public Block(int dx, int dy) {
+    Air(int dx, int dy) {
         ImageIcon ii = new ImageIcon(this.getClass().getResource(block));
         image = ii.getImage();
         x = dx;
         y = dy;
+        solid=false;
     }
 
 

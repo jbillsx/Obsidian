@@ -3,6 +3,8 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
+import java.util.ArrayList;
+import java.util.Iterator;
 public class Player {
 
     private String user = "user.png";
@@ -38,26 +40,48 @@ public class Player {
     }
 
 
-    public void move(Block p) {
+    public void move(ArrayList<Block> p) {
         y += dy;
         if(this.y-this.old_y == 100)
         {
             dy = 4;
         }
-        if(help.Collide(this, p))
+        Iterator<Block> itr = p.iterator();
+        while(itr.hasNext())
         {
-            if (p.solid)
+            Block next = itr.next();
+            //help.Mess(new Boolean(next.solid).toString());
+            if(next.solid && next.visible)
             {
-                y -= dy;
-                this.jump = true;
+                if(help.Collide(this, next))
+                {
+
+
+                    if (next.solid)
+                    {
+                        y -= dy;
+                        this.jump = true;
+                    }
+                }
             }
         }
         x += dx;
-        if(help.Collide(this, p))
+        itr = p.iterator();
+        while(itr.hasNext())
         {
-            if (p.solid)
+            Block next = itr.next();
+            if(next.solid && next.visible)
             {
-            x -= dx;
+                if(help.Collide(this, next))
+                {
+
+
+                    if (next.solid)
+                    {
+                        x -= dx;
+                        this.jump = true;
+                    }
+                }
             }
         }
     }
@@ -78,7 +102,7 @@ public class Player {
         return image;
     }
 
-    public void keyPressed(KeyEvent e, Block tile) {
+    public void keyPressed(KeyEvent e) {
 
         int key = e.getKeyCode();
 
