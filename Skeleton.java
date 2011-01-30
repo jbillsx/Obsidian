@@ -18,12 +18,12 @@ public class Skeleton extends JFrame {
         add(new Board());
         setTitle(x);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(800, 512);
+        setSize(774, 508);
         setLocationRelativeTo(null);
         setVisible(true);
         setResizable(false);
     }
     public static void main(String[] args) {
-        new Skeleton("Obsidian: 2d minecraft");
+        new Skeleton("Obsidian: 2D Minecraft");
     }
 }

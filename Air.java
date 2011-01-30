@@ -13,8 +13,8 @@ public class Air extends Block{
     Air(int dx, int dy) {
         ImageIcon ii = new ImageIcon(this.getClass().getResource(block));
         image = ii.getImage();
-        x = dx;
-        y = dy;
+        x = dx * 32;
+        y = dy * 32;
         solid=false;
     }
 

@@ -40,52 +40,62 @@ public class Player {
     }
 
 
-    public void move(ArrayList<Block> p) {
+    public void move(ArrayList<ArrayList> p) {
         y += dy;
         if(this.y-this.old_y == 100)
         {
             dy = 4;
         }
-        Iterator<Block> itr = p.iterator();
-        while(itr.hasNext())
+        for (ArrayList row: p)
         {
-            Block next = itr.next();
-            //help.Mess(new Boolean(next.solid).toString());
-            if(next.solid && next.visible)
+            Iterator<Block> itr = row.iterator();
+            while(itr.hasNext())
             {
-                if(help.Collide(this, next))
+                Block next = itr.next();
+                //help.Mess(new Boolean(next.solid).toString());
+                if(next.solid && next.visible)
                 {
-
-
-                    if (next.solid)
+                    if(help.Collide(this, next))
                     {
-                        y -= dy;
-                        this.jump = true;
+
+
+                        if (next.solid)
+                        {
+                            y -= dy;
+                            this.jump = true;
+                        }
                     }
                 }
             }
         }
         x += dx;
-        itr = p.iterator();
-        while(itr.hasNext())
+        for (ArrayList row: p)
         {
-            Block next = itr.next();
-            if(next.solid && next.visible)
+            Iterator<Block> itr = row.iterator();
+            while(itr.hasNext())
             {
-                if(help.Collide(this, next))
+                Block next = itr.next();
+                if(next.solid && next.visible)
                 {
-
-
-                    if (next.solid)
+                    if(help.Collide(this, next))
                     {
-                        x -= dx;
-                        this.jump = true;
+
+
+                        if (next.solid)
+                        {
+                            x -= dx;
+                            this.jump = true;
+                        }
                     }
                 }
             }
         }
     }
-
+    private void ChangeImage()
+    {
+        ImageIcon ii = new ImageIcon(this.getClass().getResource(user));
+        image = ii.getImage();
+    }
     public int getX() {
         return x;
     }
@@ -108,10 +118,14 @@ public class Player {
 
         if (key == KeyEvent.VK_LEFT) {
             dx = -2;
+            user = "userleft.png";
+            ChangeImage();
         }
 
         if (key == KeyEvent.VK_RIGHT) {
             dx = 2;
+            user = "user.png";
+            ChangeImage();
         }
 
         if (key == KeyEvent.VK_UP) {
